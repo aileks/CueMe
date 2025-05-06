@@ -4,71 +4,79 @@
 
 @layer base {
   :root {
-    --background: oklch(0.98 0.02 80);
-    --foreground: oklch(0.2 0.02 280);
+    --background: oklch(0.97 0.02 85);
+    --foreground: oklch(0.15 0.01 0);
 
-    --primary: oklch(0.65 0.28 12);
-    --primary-foreground: oklch(0.98 0.01 80);
+    --primary: oklch(0.55 0.28 0);
+    --primary-foreground: oklch(0.98 0 0);
 
-    --secondary: oklch(0.87 0.05 96);
-    --secondary-foreground: oklch(0.2 0.03 280);
+    --secondary: oklch(0.9 0.03 85);
+    --secondary-foreground: oklch(0.15 0.01 0);
 
-    --accent: oklch(0.7 0.25 210);
-    --accent-foreground: oklch(0.98 0.01 80);
+    --accent: oklch(0.65 0.25 220);
+    --accent-foreground: oklch(0.98 0 0);
 
     --destructive: oklch(0.65 0.28 25);
-    --destructive-foreground: oklch(0.98 0.01 80);
+    --destructive-foreground: oklch(0.98 0 0);
 
-    --muted: oklch(0.92 0.02 80);
-    --muted-foreground: oklch(0.45 0.03 280);
-    --card: oklch(0.98 0.02 80);
-    --card-foreground: oklch(0.2 0.02 280);
-    --popover: oklch(0.98 0.02 80);
-    --popover-foreground: oklch(0.2 0.02 280);
+    --muted: oklch(0.9 0.02 85);
+    --muted-foreground: oklch(0.4 0.01 0);
 
-    --border-color: oklch(0.25 0.05 280);
-    --input: oklch(0.92 0.02 80);
+    --card: var(--background);
+    --card-foreground: var(--foreground);
 
-    --shadow-color: oklch(0.4 0.04 280 / 0.7);
+    --popover: var(--background);
+    --popover-foreground: var(--foreground);
+
+    --border-color: oklch(0.15 0.01 0);
+    --input: var(--background);
+
     --border-width: 2px;
-    --shadow-offset: 3px;
-    --ring: oklch(0.65 0.28 12);
+    --shadow-color: oklch(0.15 0.01 0);
+    --shadow-offset: 4px;
 
-    --radius-sm: 2px;
-    --radius-md: 4px;
-    --radius-lg: 6px;
+    --ring: var(--primary);
   }
 
   .dark {
-    --background: oklch(0.22 0.02 280);
-    --foreground: oklch(0.96 0.01 80);
+    --background: oklch(0.2 0.01 0);
+    --foreground: oklch(0.95 0.01 85);
 
-    --primary: oklch(0.75 0.26 12);
-    --primary-foreground: oklch(0.15 0.02 280);
+    --primary: oklch(0.7 0.25 0);
+    --primary-foreground: oklch(0.15 0.01 0);
 
-    --secondary: oklch(0.32 0.06 96);
-    --secondary-foreground: oklch(0.96 0.01 80);
+    --secondary: oklch(0.3 0.02 0);
+    --secondary-foreground: oklch(0.95 0.01 85);
 
-    --accent: oklch(0.68 0.22 210);
-    --accent-foreground: oklch(0.15 0.02 280);
+    --accent: oklch(0.7 0.25 220);
+    --accent-foreground: oklch(0.15 0.01 0);
 
-    --destructive: oklch(0.62 0.32 25);
-    --destructive-foreground: oklch(0.15 0.02 280);
+    --destructive: oklch(0.65 0.3 25);
+    --destructive-foreground: oklch(0.15 0.01 0);
 
-    --muted: oklch(0.32 0.03 280);
-    --muted-foreground: oklch(0.78 0.02 80);
-    --card: oklch(0.27 0.02 280);
-    --card-foreground: oklch(0.96 0.01 80);
-    --popover: oklch(0.27 0.02 280);
-    --popover-foreground: oklch(0.96 0.01 80);
+    --muted: oklch(0.3 0.01 0);
+    --muted-foreground: oklch(0.75 0.01 85);
 
-    --border-color: oklch(0.75 0.04 80);
-    --input: oklch(0.32 0.03 280);
+    --card: oklch(0.25 0.01 0);
+    --card-foreground: oklch(0.95 0.01 85);
 
-    --shadow-color: oklch(0.1 0.03 280 / 0.8);
+    --popover: oklch(0.25 0.01 0);
+    --popover-foreground: oklch(0.95 0.01 85);
+
+    --border-color: oklch(0.75 0.01 85);
+    --input: oklch(0.25 0.01 0);
+
+    --shadow-color: oklch(0.1 0.01 0);
     --border-width: 2px;
-    --shadow-offset: 3px;
-    --ring: oklch(0.7 0.25 12);
+    --shadow-offset: 4px;
+
+    --ring: var(--primary);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
   }
 }
 
@@ -95,86 +103,116 @@
 
   --shadow-default: var(--shadow-offset) var(--shadow-offset) 0 0
     var(--shadow-color);
-  --shadow-hover: calc(var(--shadow-offset) * 1.5)
-    calc(var(--shadow-offset) * 1.5) 0 0 var(--shadow-color);
-  --shadow-active: calc(var(--shadow-offset) * 0.5)
-    calc(var(--shadow-offset) * 0.5) 0 0 var(--shadow-color);
+  --shadow-active: 2px 2px 0 0 var(--shadow-color);
 
   --border-default: var(--border-width) solid var(--border-color);
-
-  --radius-default: var(--radius-sm);
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
 
   --font-sans: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-@utility neu-box {
-  @apply border-border bg-background text-foreground;
-  @apply border-[var(--border-width)] border-solid shadow-[var(--shadow-default)];
-  @apply hover:shadow-[var(--shadow-hover)] active:shadow-[var(--shadow-active)];
-  @apply transition-all duration-200 ease-in-out;
-  @apply rounded-[var(--radius-sm)];
+.neu-box {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-default);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-@utility neu-button {
-  @apply neu-box px-4 py-2;
-  @apply hover:translate-y-[-1.5px] active:translate-y-[1px];
-  @apply transition-all duration-200;
-  @apply font-medium;
+.neu-card {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-default);
+  padding: 1.5rem;
 }
 
-@utility neu-card {
-  @apply border-border bg-background text-foreground;
-  @apply border-[var(--border-width)] border-solid shadow-[var(--shadow-default)];
-  @apply transition-all duration-200 ease-in-out;
-  @apply rounded-[var(--radius-md)];
-  @apply p-6;
+.neu-button {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-default);
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-@utility neu-input {
-  @apply border-border bg-background text-foreground;
-  @apply border-[var(--border-width)] border-solid shadow-[var(--shadow-default)];
-  @apply transition-all duration-200;
-  @apply rounded-[var(--radius-sm)];
-  @apply px-4 py-2;
-  @apply focus:border-primary focus:shadow-[inset_0_0_0_1px_var(--color-primary)];
-  @apply focus:outline-none;
+.neu-button:hover {
+  transform: translateY(-2px);
 }
 
-@utility neu-tag {
-  @apply inline-flex items-center px-2 py-1;
-  @apply bg-secondary text-secondary-foreground;
-  @apply border-[var(--border-width)] border-solid border-border;
-  @apply shadow-[2px_2px_0_0_var(--shadow-color)];
-  @apply rounded-[var(--radius-sm)];
-  @apply text-sm font-medium;
+.neu-button:active {
+  transform: translateY(1px);
+  box-shadow: var(--shadow-active);
 }
 
-@utility neu-nav-link {
-  @apply relative px-3 py-2;
-  @apply border-b-[var(--border-width)] border-transparent;
-  @apply hover:border-primary transition-all duration-200;
-  @apply font-medium;
+.neu-input {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-default);
+  padding: 0.5rem 1rem;
+  width: 100%;
+  outline: none;
 }
 
-@utility neu-nav-link-active {
-  @apply neu-nav-link;
-  @apply border-b-[var(--border-width)] border-primary;
+.neu-input:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: var(--shadow-default);
 }
 
-@utility neu-container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+.text-primary {
+  color: var(--primary);
 }
 
-@utility neu-heading {
-  @apply font-bold tracking-tight;
-  @apply relative;
-  @apply after:content-[''] after:absolute after:bottom-0 after:left-0;
-  @apply after:w-[2em] after:h-[0.15em] after:bg-primary;
+.neu-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: 2px 2px 0 0 var(--shadow-color);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.neu-nav-link {
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  font-weight: 500;
+  border-bottom: var(--border-width) solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.neu-nav-link:hover {
+  border-bottom-color: var(--primary);
+}
+
+.neu-nav-link-active {
+  border-bottom-color: var(--primary);
+}
+
+.neu-heading {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  position: relative;
+}
+
+.neu-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -0.25rem;
+  left: 0;
+  width: 2em;
+  height: 0.15em;
+  background-color: var(--primary);
 }
 
 body {
