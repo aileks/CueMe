@@ -1,6 +1,124 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
+@layer base {
+    :root {
+        --background: oklch(0.98 0 0);
+        --foreground: oklch(0.2 0 0);
+
+        --primary: oklch(0.7 0.25 12);
+        --primary-foreground: oklch(0.98 0 0);
+
+        --secondary: oklch(0.85 0.12 96);
+        --secondary-foreground: oklch(0.2 0 0);
+
+        --accent: oklch(0.75 0.2 51);
+        --accent-foreground: oklch(0.98 0 0);
+
+        --destructive: oklch(0.7 0.32 25);
+        --destructive-foreground: oklch(0.98 0 0);
+
+        --muted: oklch(0.9 0 0);
+        --muted-foreground: oklch(0.4 0 0);
+        --card: oklch(0.98 0 0);
+        --card-foreground: oklch(0.2 0 0);
+        --popover: oklch(0.98 0 0);
+        --popover-foreground: oklch(0.2 0 0);
+        --input: oklch(0.9 0 0);
+
+        --shadow-color: oklch(0.2 0 0);
+        --border-width: 3px;
+        --shadow-offset: 4px;
+
+        --ring: oklch(0.7 0.25 12);
+    }
+
+    .dark {
+        --background: oklch(0.2 0 0);
+        --foreground: oklch(0.98 0 0);
+
+        --primary: oklch(0.75 0.25 12);
+        --primary-foreground: oklch(0.1 0 0);
+
+        --secondary: oklch(0.3 0.12 96);
+        --secondary-foreground: oklch(0.98 0 0);
+
+        --accent: oklch(0.65 0.25 51);
+        --accent-foreground: oklch(0.1 0 0);
+
+        --destructive: oklch(0.65 0.35 25);
+        --destructive-foreground: oklch(0.1 0 0);
+
+        --muted: oklch(0.3 0 0);
+        --muted-foreground: oklch(0.8 0 0);
+        --card: oklch(0.25 0 0);
+        --card-foreground: oklch(0.98 0 0);
+        --popover: oklch(0.25 0 0);
+        --popover-foreground: oklch(0.98 0 0);
+        --input: oklch(0.3 0 0);
+
+        --shadow-color: oklch(0.1 0 0);
+        --border-width: 3px;
+        --shadow-offset: 4px;
+        --ring: oklch(0.7 0.25 12);
+    }
+}
+
 @theme {
+    --color-background: oklch(var(--background));
+    --color-foreground: oklch(var(--foreground));
+    --color-primary: oklch(var(--primary));
+    --color-primary-foreground: oklch(var(--primary-foreground));
+    --color-secondary: oklch(var(--secondary));
+    --color-secondary-foreground: oklch(var(--secondary-foreground));
+    --color-accent: oklch(var(--accent));
+    --color-accent-foreground: oklch(var(--accent-foreground));
+    --color-destructive: oklch(var(--destructive));
+    --color-destructive-foreground: oklch(var(--destructive-foreground));
+    --color-muted: oklch(var(--muted));
+    --color-muted-foreground: oklch(var(--muted-foreground));
+    --color-card: oklch(var(--card));
+    --color-card-foreground: oklch(var(--card-foreground));
+    --color-popover: oklch(var(--popover));
+    --color-popover-foreground: oklch(var(--popover-foreground));
+    --color-border: oklch(var(--border));
+    --color-input: oklch(var(--input));
+    --color-ring: oklch(var(--ring));
+
+    --shadow-default: var(--shadow-offset) var(--shadow-offset) 0 0 oklch(var(--shadow-color));
+    --shadow-hover: calc(var(--shadow-offset) * 1.5) calc(var(--shadow-offset) * 1.5) 0 0 oklch(var(--shadow-color));
+    --shadow-active: calc(var(--shadow-offset) * 0.5) calc(var(--shadow-offset) * 0.5) 0 0 oklch(var(--shadow-color));
+
+    --border-default: var(--border-width) solid oklch(var(--border));
+
+    --radius-default: 0px;
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+
     --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@utility neu-box {
+    @apply border-border bg-background text-foreground;
+    @apply border-[var(--border-width)] border-solid shadow-[var(--shadow-default)];
+    @apply hover:shadow-[var(--shadow-hover)] active:shadow-[var(--shadow-active)];
+    @apply transition-shadow duration-100;
+}
+
+@utility neu-button {
+    @apply brutalist-box px-4 py-2;
+    @apply hover:translate-y-[-2px] active:translate-y-[1px];
+    @apply transition-transform;
+}
+
+@utility neu-card {
+    @apply brutalist-box p-6;
+}
+
+@utility neu-input {
+    @apply brutalist-box px-4 py-2;
+    @apply focus:ring-1 focus:ring-primary;
 }
