@@ -72,12 +72,6 @@
 
     --ring: var(--primary);
   }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
-  }
 }
 
 @theme {
@@ -216,5 +210,5 @@
 }
 
 body {
-  @apply bg-background text-foreground font-sans;
+  @apply bg-background font-sans text-foreground;
 }
