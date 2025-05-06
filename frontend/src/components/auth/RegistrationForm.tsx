@@ -18,6 +18,7 @@ export default function RegistrationForm({
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState(''); // Added state for password confirmation
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,6 +26,14 @@ export default function RegistrationForm({
     e.preventDefault();
     setIsLoading(true);
     setErrors({});
+
+    if (password !== passwordConfirmation) {
+      setErrors({
+        passwordConfirmation: ['Passwords do not match.'],
+      });
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch('/api/auth/register', {
@@ -82,7 +91,6 @@ export default function RegistrationForm({
               onChange={e => setUsername(e.target.value)}
               required
             />
-
             {errors.username && (
               <p className='mt-1 text-destructive'>{errors.username[0]}</p>
             )}
@@ -104,13 +112,12 @@ export default function RegistrationForm({
               onChange={e => setEmail(e.target.value)}
               required
             />
-
             {errors.email && (
               <p className='mt-1 text-destructive'>{errors.email[0]}</p>
             )}
           </div>
 
-          <div className='mb-6'>
+          <div className='mb-4'>
             <label
               htmlFor='password'
               className='block mb-2 font-medium'
@@ -126,9 +133,31 @@ export default function RegistrationForm({
               onChange={e => setPassword(e.target.value)}
               required
             />
-
             {errors.password && (
               <p className='mt-1 text-destructive'>{errors.password[0]}</p>
+            )}
+          </div>
+
+          <div className='mb-6'>
+            <label
+              htmlFor='passwordConfirmation'
+              className='block mb-2 font-medium'
+            >
+              Confirm Password
+            </label>
+
+            <input
+              id='passwordConfirmation'
+              type='password'
+              className='neu-input w-full'
+              value={passwordConfirmation}
+              onChange={e => setPasswordConfirmation(e.target.value)}
+              required
+            />
+            {errors.passwordConfirmation && (
+              <p className='mt-1 text-destructive'>
+                {errors.passwordConfirmation[0]}
+              </p>
             )}
           </div>
 

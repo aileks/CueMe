@@ -12,8 +12,10 @@ const Dashboard = () => {
     <div className='container mx-auto p-6'>
       <header className='flex justify-between items-center mb-8'>
         <h1 className='text-4xl font-bold'>CueMe</h1>
+
         <div className='flex items-center gap-4'>
           <span>Welcome, {user?.username}!</span>
+
           <button
             onClick={handleLogout}
             className='neu-button'
@@ -25,25 +27,30 @@ const Dashboard = () => {
 
       <div className='neu-card mb-8'>
         <h2 className='text-2xl font-bold mb-4'>Your Dashboard</h2>
+
         <p className='mb-4'>
           Welcome to CueMe, your personal music playlist generator. Start
           creating playlists based on your preferences!
         </p>
+
         <button className='neu-button'>Create New Playlist</button>
       </div>
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <div className='neu-card'>
           <h3 className='text-xl font-bold mb-3'>Recent Playlists</h3>
+
           <p className='text-muted-foreground'>
             You haven't created any playlists yet. Get started by clicking the
             button above!
           </p>
         </div>
+
         <div className='neu-card'>
-          <h3 className='text-xl font-bold mb-3'>Recommendations</h3>
+          <h3 className='text-xl font-bold mb-3'>Surprise Me</h3>
+
           <p className='text-muted-foreground'>
-            Create your first playlist to get personalized recommendations.
+            Create your first playlist to get personalized randomizations.
           </p>
         </div>
       </div>

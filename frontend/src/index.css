@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: oklch(0.97 0.02 85);
+    --background: oklch(0.97 0.01 420);
     --foreground: oklch(0.15 0.01 0);
 
     --primary: oklch(0.55 0.28 0);
