@@ -1,0 +1,26 @@
+[project]
+name = "cueme"
+version = "0.1.0"
+description = "Music playlist generator"
+authors = [
+    {name = "Aaliyah Harper",email = "aeverly14@pm.me"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "flask (>=3.1.0,<4.0.0)",
+    "flask-cors (>=5.0.1,<6.0.0)",
+    "python-dotenv (>=1.1.0,<2.0.0)",
+    "scikit-learn (>=1.6.1,<2.0.0)",
+    "joblib (>=1.5.0,<2.0.0)",
+    "pandas (>=2.2.3,<3.0.0)"
+]
+
+[tool.poetry]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
