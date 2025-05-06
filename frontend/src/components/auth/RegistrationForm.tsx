@@ -6,15 +6,16 @@ type User = {
   username: string;
 };
 
-interface LoginFormProps {
+interface RegistrationFormProps {
   onSuccess: (user: User) => void;
-  onSwitchToRegister: () => void;
+  onSwitchToLogin: () => void;
 }
 
-export default function LoginForm({
+export default function RegistrationForm({
   onSuccess,
-  onSwitchToRegister,
-}: LoginFormProps) {
+  onSwitchToLogin,
+}: RegistrationFormProps) {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<Record<string, string[]>>({});
@@ -26,12 +27,12 @@ export default function LoginForm({
     setErrors({});
 
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, email, password }),
       });
 
       const data = await res.json();
@@ -54,7 +55,7 @@ export default function LoginForm({
   return (
     <div className='w-full max-w-md mx-auto'>
       <div className='neu-card my-8'>
-        <h2 className='text-3xl font-bold mb-6'>Log In</h2>
+        <h2 className='text-3xl font-bold mb-6'>Create Account</h2>
 
         {errors.message && (
           <div className='mb-4 p-3 bg-destructive text-destructive-foreground'>
@@ -65,6 +66,28 @@ export default function LoginForm({
         )}
 
         <form onSubmit={handleSubmit}>
+          <div className='mb-4'>
+            <label
+              htmlFor='username'
+              className='block mb-2 font-medium'
+            >
+              Username
+            </label>
+
+            <input
+              id='username'
+              type='text'
+              className='neu-input w-full'
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              required
+            />
+
+            {errors.username && (
+              <p className='mt-1 text-destructive'>{errors.username[0]}</p>
+            )}
+          </div>
+
           <div className='mb-4'>
             <label
               htmlFor='email'
@@ -114,17 +137,17 @@ export default function LoginForm({
             className='neu-button w-full mb-4 font-bold'
             disabled={isLoading}
           >
-            {isLoading ? 'Logging in...' : 'Log In'}
+            {isLoading ? 'Creating Account...' : 'Register'}
           </button>
 
           <p className='text-center mt-4'>
-            Don't have an account?{' '}
+            Already have an account?{' '}
             <button
               type='button'
               className='text-primary font-medium underline'
-              onClick={onSwitchToRegister}
+              onClick={onSwitchToLogin}
             >
-              Register
+              Log In
             </button>
           </p>
         </form>
