@@ -6,6 +6,5 @@ __pycache__/
 .vscode/
 .idea/
 dev.db
-.flaskenv
 .venv/
 venv/
