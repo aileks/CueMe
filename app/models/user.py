@@ -16,10 +16,10 @@ else:
     UUIDColumnType = GenericUUID(as_uuid=True)
 
 
-class User(UserMixin):
+class User(db.Model, UserMixin):
     __tablename__ = "users"
 
-    if environment == "production":
+    if environment == "prod":
         __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(UUIDColumnType, primary_key=True, default=uuid.uuid4)

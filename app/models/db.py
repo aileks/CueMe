@@ -10,7 +10,7 @@ db = SQLAlchemy()
 
 
 def add_prefix_for_prod(attr):
-    if environment == "production":
+    if environment == "prod":
         return f"{SCHEMA}.{attr}"
     else:
         return attr
