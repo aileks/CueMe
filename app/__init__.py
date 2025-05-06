@@ -2,22 +2,22 @@ import os
 
 from flask import Flask, redirect, request, send_from_directory
 from flask_cors import CORS
+from flask_login import LoginManager
 from flask_migrate import Migrate
 
-# from flask_login import LoginManager
 from .config import Config
-from .models import db
+from .models import User, db
 
 app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
 app.config.from_object(Config)
 
-# login = LoginManager(app)
-# login.login_view = "auth.unauthorized"
+login = LoginManager(app)
+login.login_view = "auth.unauthorized"
 
 
-# @login.user_loader
-# def load_user(id):
-#     return User.query.get(int(id))
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 db.init_app(app)
