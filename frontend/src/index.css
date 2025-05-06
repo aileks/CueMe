@@ -109,16 +109,16 @@
 }
 
 @utility neu-button {
-    @apply brutalist-box px-4 py-2;
+    @apply neu-box px-4 py-2;
     @apply hover:translate-y-[-2px] active:translate-y-[1px];
     @apply transition-transform;
 }
 
 @utility neu-card {
-    @apply brutalist-box p-6;
+    @apply neu-box p-6;
 }
 
 @utility neu-input {
-    @apply brutalist-box px-4 py-2;
+    @apply neu-box px-4 py-2;
     @apply focus:ring-1 focus:ring-primary;
 }
