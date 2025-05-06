@@ -10,8 +10,8 @@ const Dashboard = () => {
 
   return (
     <div className='container mx-auto p-6'>
-      <header className='flex justify-between items-center mb-8'>
-        <h1 className='text-4xl font-bold'>CueMe</h1>
+      <header className='mb-8 flex items-center justify-between'>
+        <h1 className='text-4xl font-bold'>QueMe</h1>
 
         <div className='flex items-center gap-4'>
           <span>Welcome, {user?.username}!</span>
@@ -26,19 +26,19 @@ const Dashboard = () => {
       </header>
 
       <div className='neu-card mb-8'>
-        <h2 className='text-2xl font-bold mb-4'>Your Dashboard</h2>
+        <h2 className='mb-4 text-2xl font-bold'>Your Dashboard</h2>
 
         <p className='mb-4'>
-          Welcome to CueMe, your personal music playlist generator. Start
+          Welcome to QueMe, your personal music playlist generator. Start
           creating playlists based on your preferences!
         </p>
 
         <button className='neu-button'>Create New Playlist</button>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+      <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
         <div className='neu-card'>
-          <h3 className='text-xl font-bold mb-3'>Recent Playlists</h3>
+          <h3 className='mb-3 text-xl font-bold'>Recent Playlists</h3>
 
           <p className='text-muted-foreground'>
             You haven't created any playlists yet. Get started by clicking the
@@ -47,7 +47,7 @@ const Dashboard = () => {
         </div>
 
         <div className='neu-card'>
-          <h3 className='text-xl font-bold mb-3'>Surprise Me</h3>
+          <h3 className='mb-3 text-xl font-bold'>Surprise Me</h3>
 
           <p className='text-muted-foreground'>
             Create your first playlist to get personalized randomizations.
@@ -63,7 +63,7 @@ const AppContent = () => {
 
   if (isLoading) {
     return (
-      <div className='h-screen flex items-center justify-center'>
+      <div className='flex h-screen items-center justify-center'>
         <div className='neu-box p-6'>
           <p className='text-xl'>Loading...</p>
         </div>

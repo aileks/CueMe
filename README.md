@@ -1,6 +1,6 @@
-# CueMe
+# QueMe
 
-CueMe is a web application that uses machine learning algorithms to create personalized music playlists based on your preferences. Build, save, and export playlists with just a few clicks.
+QueMe is a web application that uses machine learning algorithms to create personalized music playlists based on your preferences. Build, save, and export playlists with just a few clicks.
 
 ## Features
 
@@ -25,8 +25,8 @@ CueMe is a web application that uses machine learning algorithms to create perso
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/aileks/CueMe.git
-   cd cueme
+   git clone https://github.com/aileks/QueMe.git
+   cd QueMe
    ```
 
 2. Set up environment variables

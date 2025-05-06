@@ -1,10 +1,8 @@
 [project]
-name = "cueme"
+name = "QueMe"
 version = "0.1.0"
 description = "Music playlist generator"
-authors = [
-    {name = "Aaliyah Harper",email = "aeverly14@pm.me"}
-]
+authors = [{ name = "Aaliyah Harper", email = "aeverly14@pm.me" }]
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
 dependencies = [
@@ -16,7 +14,7 @@ dependencies = [
     "pandas (>=2.2.3,<3.0.0)",
     "flask-migrate (>=4.1.0,<5.0.0)",
     "flask-login (>=0.6.3,<0.7.0)",
-    "flask-wtf (>=1.2.2,<2.0.0)"
+    "flask-wtf (>=1.2.2,<2.0.0)",
 ]
 
 [tool.poetry]
