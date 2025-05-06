@@ -12,10 +12,8 @@ db_uri = os.environ.get("DATABASE_URL", "")
 
 if db_uri.startswith("postgresql"):
     UUIDColumnType = PG_UUID(as_uuid=True)
-    print("DEBUG: Using PostgreSQL native UUID type for User ID.")  # For verification
 else:
     UUIDColumnType = GenericUUID(as_uuid=True)
-    print("DEBUG: Using generic UUID type (for SQLite) for User ID.")
 
 
 class User(UserMixin):
