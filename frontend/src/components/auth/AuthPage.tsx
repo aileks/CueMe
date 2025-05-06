@@ -22,7 +22,7 @@ export default function AuthPage({ onAuthenticated }: AuthPageProps) {
           <h1 className='text-4xl font-bold mb-2'>CueMe</h1>
 
           <p className='text-muted-foreground'>
-            Create personalized music playlists with machine learning
+            Create your next music fixation.
           </p>
         </div>
 
