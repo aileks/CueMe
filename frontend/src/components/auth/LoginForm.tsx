@@ -1,25 +1,18 @@
 import { useState, type FormEvent } from 'react';
-
-type User = {
-  id: string;
-  email: string;
-  username: string;
-};
+import { useAuth } from '../../hooks/useAuth';
 
 interface LoginFormProps {
-  onSuccess: (user: User) => void;
   onSwitchToRegister: () => void;
 }
 
-export default function LoginForm({
-  onSuccess,
-  onSwitchToRegister,
-}: LoginFormProps) {
+export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const [isLoading, setIsLoading] = useState(false);
 
+  const { login } = useAuth();
+  
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -41,7 +34,7 @@ export default function LoginForm({
         return;
       }
 
-      onSuccess(data);
+      login(data);
     } catch (_err) {
       setErrors({
         message: ['An unexpected error occurred. Please try again.'],
@@ -52,12 +45,12 @@ export default function LoginForm({
   };
 
   return (
-    <div className='w-full max-w-md mx-auto'>
+    <div className='mx-auto w-full max-w-md'>
       <div className='neu-card my-8'>
-        <h2 className='text-3xl font-bold mb-6'>Log In</h2>
+        <h2 className='mb-6 text-3xl font-bold'>Log In</h2>
 
         {errors.message && (
-          <div className='mb-4 p-3 bg-destructive text-destructive-foreground'>
+          <div className='mb-4 bg-destructive p-3 text-destructive-foreground'>
             {errors.message.map((error, i) => (
               <p key={i}>{error}</p>
             ))}
@@ -68,7 +61,7 @@ export default function LoginForm({
           <div className='mb-4'>
             <label
               htmlFor='email'
-              className='block mb-2 font-medium'
+              className='mb-2 block font-medium'
             >
               Email
             </label>
@@ -90,7 +83,7 @@ export default function LoginForm({
           <div className='mb-6'>
             <label
               htmlFor='password'
-              className='block mb-2 font-medium'
+              className='mb-2 block font-medium'
             >
               Password
             </label>
@@ -111,17 +104,17 @@ export default function LoginForm({
 
           <button
             type='submit'
-            className='neu-button w-full mb-4 font-bold'
+            className='neu-button mb-4 w-full font-bold'
             disabled={isLoading}
           >
             {isLoading ? 'Logging in...' : 'Log In'}
           </button>
 
-          <p className='text-center mt-4'>
+          <p className='mt-4 text-center'>
             Don't have an account?{' '}
             <button
               type='button'
-              className='text-primary font-medium underline'
+              className='font-medium text-primary underline'
               onClick={onSwitchToRegister}
             >
               Register

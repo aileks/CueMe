@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import AuthPage from './components/auth/AuthPage';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { useAuth } from './hooks/useAuth';
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
@@ -59,7 +60,11 @@ const Dashboard = () => {
 };
 
 const AppContent = () => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, checkAuth } = useAuth();
+  
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
   if (isLoading) {
     return (
@@ -71,20 +76,14 @@ const AppContent = () => {
     );
   }
 
-  return user ?
-      <Dashboard />
-    : <AuthPage
-        onAuthenticated={userData => console.log('Authenticated:', userData)}
-      />;
+  return user ? <Dashboard /> : <AuthPage />;
 };
 
 function App() {
   return (
-    <AuthProvider>
-      <div className='min-h-screen bg-background text-foreground'>
-        <AppContent />
-      </div>
-    </AuthProvider>
+    <div className='min-h-screen bg-background text-foreground'>
+      <AppContent />
+    </div>
   );
 }
 

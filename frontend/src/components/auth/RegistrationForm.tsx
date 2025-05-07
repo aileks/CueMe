@@ -1,18 +1,11 @@
 import { useState, type FormEvent } from 'react';
-
-type User = {
-  id: string;
-  email: string;
-  username: string;
-};
+import { useAuth } from '../../hooks/useAuth';
 
 interface RegistrationFormProps {
-  onSuccess: (user: User) => void;
   onSwitchToLogin: () => void;
 }
 
 export default function RegistrationForm({
-  onSuccess,
   onSwitchToLogin,
 }: RegistrationFormProps) {
   const [username, setUsername] = useState('');
@@ -21,6 +14,8 @@ export default function RegistrationForm({
   const [passwordConfirmation, setPasswordConfirmation] = useState(''); // Added state for password confirmation
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const [isLoading, setIsLoading] = useState(false);
+  
+  const { login } = useAuth();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -51,7 +46,7 @@ export default function RegistrationForm({
         return;
       }
 
-      onSuccess(data);
+      login(data);
     } catch (_err) {
       setErrors({
         message: ['An unexpected error occurred. Please try again.'],

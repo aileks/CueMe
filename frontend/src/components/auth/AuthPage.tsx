@@ -2,17 +2,7 @@ import { useState } from 'react';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 
-type User = {
-  id: string;
-  email: string;
-  username: string;
-};
-
-interface AuthPageProps {
-  onAuthenticated: (user: User) => void;
-}
-
-export default function AuthPage({ onAuthenticated }: AuthPageProps) {
+export default function AuthPage() {
   const [showLogin, setShowLogin] = useState(true);
 
   return (
@@ -28,11 +18,9 @@ export default function AuthPage({ onAuthenticated }: AuthPageProps) {
 
         {showLogin ?
           <LoginForm
-            onSuccess={onAuthenticated}
             onSwitchToRegister={() => setShowLogin(false)}
           />
         : <RegistrationForm
-            onSuccess={onAuthenticated}
             onSwitchToLogin={() => setShowLogin(true)}
           />
         }
