@@ -10,12 +10,7 @@ export default function AuthPage() {
   const { isAuthenticated } = useAuth();
 
   if (isAuthenticated) {
-    return (
-      <Navigate
-        to='/'
-        replace
-      />
-    );
+    return <Navigate to='/' replace />;
   }
 
   return (

@@ -9,10 +9,10 @@ export default function CreatePlaylist() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [playlistGenerated, setPlaylistGenerated] = useState(false);
 
-  // Placeholder genre list - would come from an API in a real app
   const availableGenres = [
     'Rock',
     'Pop',
+    'Punk',
     'Hip-Hop',
     'R&B',
     'Jazz',
@@ -47,7 +47,7 @@ export default function CreatePlaylist() {
     e.preventDefault();
     setIsGenerating(true);
 
-    // Simulate API call
+    // TODO: Replace with actual API call
     setTimeout(() => {
       setIsGenerating(false);
       setPlaylistGenerated(true);
@@ -61,12 +61,14 @@ export default function CreatePlaylist() {
       {playlistGenerated ?
         <div className='neu-card'>
           <h2 className='mb-4 text-2xl font-semibold'>Playlist Generated!</h2>
+
           <p className='mb-6'>Your playlist has been created successfully.</p>
 
           <div className='mb-6 rounded-md bg-secondary/20 px-4 py-4'>
             <p className='mb-4 text-lg font-medium'>
               This feature is coming soon!
             </p>
+
             <p>
               In the future, you'll see your generated playlist here with
               options to edit, save, or export it.
@@ -85,6 +87,7 @@ export default function CreatePlaylist() {
             >
               Create Another
             </button>
+
             <button className='neu-button'>Save Playlist</button>
           </div>
         </div>
@@ -99,6 +102,7 @@ export default function CreatePlaylist() {
               >
                 Playlist Name
               </label>
+
               <input
                 id='playlistName'
                 type='text'
@@ -113,12 +117,13 @@ export default function CreatePlaylist() {
 
           <div className='mb-6 neu-card'>
             <h2 className='mb-4 text-2xl font-semibold'>Select Genres</h2>
+
             <div className='flex flex-wrap gap-3'>
               {availableGenres.map(genre => (
                 <button
                   key={genre}
                   type='button'
-                  className={`neu-tag ${
+                  className={`neu-tag cursor-pointer transition-colors duration-200 ${
                     selectedGenres.includes(genre) ?
                       'bg-primary text-primary-foreground'
                     : ''
@@ -142,6 +147,7 @@ export default function CreatePlaylist() {
                 onChange={e => setArtistInput(e.target.value)}
                 placeholder='Artist name'
               />
+
               <button
                 type='button'
                 className='ml-2 neu-button'

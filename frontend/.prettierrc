@@ -3,11 +3,12 @@
   "tailwindStylesheet": "./src/index.css",
   "trailingComma": "es5",
   "semi": true,
+  "printWidth": 100,
   "singleQuote": true,
   "experimentalTernaries": true,
   "jsxSingleQuote": true,
-  "bracketSameLine": false,
-  "jsxBracketSameLine": false,
   "arrowParens": "avoid",
-  "singleAttributePerLine": true
+  "bracketSameLine": false,
+  "singleAttributePerLine": false,
+  "htmlWhitespaceSensitivity": "css"
 }

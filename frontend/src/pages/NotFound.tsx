@@ -10,10 +10,7 @@ export default function NotFound() {
         <p className='mb-6'>
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <Link
-          to='/'
-          className='inline-flex neu-button items-center gap-2'
-        >
+        <Link to='/' className='inline-flex neu-button items-center gap-2'>
           <Home size={18} />
           Return Home
         </Link>

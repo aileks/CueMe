@@ -72,10 +72,7 @@ export default function RegistrationForm({
 
         <form onSubmit={handleSubmit}>
           <div className='mb-4'>
-            <label
-              htmlFor='username'
-              className='mb-2 block font-medium'
-            >
+            <label htmlFor='username' className='mb-2 block font-medium'>
               Username
             </label>
 
@@ -93,10 +90,7 @@ export default function RegistrationForm({
           </div>
 
           <div className='mb-4'>
-            <label
-              htmlFor='email'
-              className='mb-2 block font-medium'
-            >
+            <label htmlFor='email' className='mb-2 block font-medium'>
               Email
             </label>
 
@@ -114,10 +108,7 @@ export default function RegistrationForm({
           </div>
 
           <div className='mb-4'>
-            <label
-              htmlFor='password'
-              className='mb-2 block font-medium'
-            >
+            <label htmlFor='password' className='mb-2 block font-medium'>
               Password
             </label>
 

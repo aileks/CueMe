@@ -18,8 +18,7 @@ export default function UserProfile() {
     setErrors({});
     setSuccessMessage('');
 
-    // This would be replaced with an actual API call
-    // For now, just simulate a successful update
+    // TODO: Replace with actual API call
     setTimeout(() => {
       setSuccessMessage('Profile updated successfully!');
       setIsLoading(false);
@@ -40,8 +39,7 @@ export default function UserProfile() {
       return;
     }
 
-    // This would be replaced with an actual API call
-    // For now, just simulate a successful update
+    // TODO: Replace with actual API call
     setTimeout(() => {
       setSuccessMessage('Password updated successfully!');
       setNewPassword('');
@@ -56,7 +54,7 @@ export default function UserProfile() {
       <h1 className='mb-6 text-3xl font-bold'>Profile Settings</h1>
 
       {successMessage && (
-        <div className='mb-6 border-l-4 border-accent bg-accent/20 p-4 text-accent-foreground'>
+        <div className='mb-6 border-l-4 border-accent bg-accent/20 p-4 text-muted-foreground'>
           {successMessage}
         </div>
       )}
@@ -66,10 +64,7 @@ export default function UserProfile() {
           <h2 className='mb-4 text-2xl font-semibold'>Account Information</h2>
           <form onSubmit={handleProfileSubmit}>
             <div className='mb-4'>
-              <label
-                htmlFor='username'
-                className='mb-2 block font-medium'
-              >
+              <label htmlFor='username' className='mb-2 block font-medium'>
                 Username
               </label>
               <input
@@ -86,10 +81,7 @@ export default function UserProfile() {
             </div>
 
             <div className='mb-6'>
-              <label
-                htmlFor='email'
-                className='mb-2 block font-medium'
-              >
+              <label htmlFor='email' className='mb-2 block font-medium'>
                 Email
               </label>
               <input
@@ -105,11 +97,7 @@ export default function UserProfile() {
               )}
             </div>
 
-            <button
-              type='submit'
-              className='neu-button'
-              disabled={isLoading}
-            >
+            <button type='submit' className='neu-button' disabled={isLoading}>
               {isLoading ? 'Updating...' : 'Update Profile'}
             </button>
           </form>
@@ -141,10 +129,7 @@ export default function UserProfile() {
             </div>
 
             <div className='mb-4'>
-              <label
-                htmlFor='newPassword'
-                className='mb-2 block font-medium'
-              >
+              <label htmlFor='newPassword' className='mb-2 block font-medium'>
                 New Password
               </label>
               <input
@@ -182,11 +167,7 @@ export default function UserProfile() {
               )}
             </div>
 
-            <button
-              type='submit'
-              className='neu-button'
-              disabled={isLoading}
-            >
+            <button type='submit' className='neu-button' disabled={isLoading}>
               {isLoading ? 'Updating...' : 'Change Password'}
             </button>
           </form>

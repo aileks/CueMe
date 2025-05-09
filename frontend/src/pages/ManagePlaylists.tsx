@@ -27,17 +27,7 @@ export default function ManagePlaylists() {
 
       {playlists.length === 0 ?
         <div className='neu-card py-10 text-center'>
-          <h2 className='mb-4 text-2xl font-semibold'>No Playlists Yet</h2>
-          <p className='mb-6 text-muted-foreground'>
-            You haven't created any playlists yet. Get started by creating your
-            first playlist!
-          </p>
-          <Link
-            to='/create'
-            className='inline-block neu-button'
-          >
-            Create Your First Playlist
-          </Link>
+          <h3 className='text-2xl font-semibold'>Coming Soon!</h3>
         </div>
       : <div className='grid gap-4'>
           {playlists.map(playlist => (
@@ -79,17 +69,6 @@ export default function ManagePlaylists() {
           ))}
         </div>
       }
-
-      <div className='mt-8 neu-card bg-secondary/20'>
-        <h2 className='mb-2 text-xl font-semibold'>Coming Soon!</h2>
-        <p>Soon you'll be able to:</p>
-        <ul className='mt-2 ml-6 list-disc'>
-          <li>Export playlists to Spotify and YouTube Music</li>
-          <li>Share playlists with friends</li>
-          <li>Collaborate on playlists</li>
-          <li>Discover playlists from other users with similar tastes</li>
-        </ul>
-      </div>
     </div>
   );
 }

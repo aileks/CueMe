@@ -11,7 +11,7 @@ export default function ThemeToggle({ className = '' }: ThemeToggleProps) {
   return (
     <button
       onClick={toggleTheme}
-      className={`neu-button flex items-center justify-center focus:outline-0 ${className}`}
+      className={`flex neu-button items-center justify-center focus:outline-0 ${className}`}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
