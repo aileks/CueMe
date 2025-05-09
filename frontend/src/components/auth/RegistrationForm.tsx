@@ -59,7 +59,7 @@ export default function RegistrationForm({
 
   return (
     <div className='mx-auto w-full max-w-md'>
-      <div className='neu-card my-8'>
+      <div className='my-8 neu-card'>
         <h2 className='mb-6 text-3xl font-bold'>Create Account</h2>
 
         {errors.message && (
@@ -159,7 +159,7 @@ export default function RegistrationForm({
 
           <button
             type='submit'
-            className='neu-button mb-4 w-full font-bold'
+            className='mb-4 w-full neu-button font-bold'
             disabled={isLoading}
           >
             {isLoading ? 'Creating Account...' : 'Register'}
@@ -169,7 +169,7 @@ export default function RegistrationForm({
             Already have an account?{' '}
             <button
               type='button'
-              className='font-medium text-primary underline'
+              className='cursor-pointer font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary/80'
               onClick={onSwitchToLogin}
             >
               Log In

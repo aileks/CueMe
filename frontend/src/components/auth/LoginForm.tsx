@@ -47,7 +47,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
 
   return (
     <div className='mx-auto w-full max-w-md'>
-      <div className='neu-card my-8'>
+      <div className='my-8 neu-card'>
         <h2 className='mb-6 text-3xl font-bold'>Log In</h2>
 
         {errors.message && (
@@ -105,7 +105,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
 
           <button
             type='submit'
-            className='neu-button mb-4 w-full font-bold'
+            className='mb-4 w-full neu-button font-bold'
             disabled={isLoading}
           >
             {isLoading ? 'Logging in...' : 'Log In'}
@@ -115,7 +115,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             Don't have an account?{' '}
             <button
               type='button'
-              className='font-medium text-primary underline'
+              className='cursor-pointer font-medium text-primary underline underline-offset-2 transition-colors duration-200 hover:text-primary/80'
               onClick={onSwitchToRegister}
             >
               Register
