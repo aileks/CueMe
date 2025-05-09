@@ -113,7 +113,10 @@
   box-shadow: var(--shadow-default);
   transition:
     transform 0.15s ease,
-    box-shadow 0.15s ease;
+    box-shadow 0.15s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .neu-card {
@@ -122,22 +125,27 @@
   border: var(--border-width) solid var(--border-color);
   box-shadow: var(--shadow-default);
   padding: 1.5rem;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .neu-button {
   background-color: var(--background);
   color: var(--foreground);
+  cursor: pointer;
   border: var(--border-width) solid var(--border-color);
   box-shadow: var(--shadow-default);
   padding: 0.5rem 1rem;
   font-weight: 500;
   transition:
     transform 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.neu-button:hover {
-  transform: translateY(-2px);
+    box-shadow 0.15s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .neu-button:active {
@@ -153,6 +161,11 @@
   padding: 0.5rem 1rem;
   width: 100%;
   outline: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .neu-input:focus {
@@ -210,5 +223,5 @@
 }
 
 body {
-  @apply bg-background font-sans text-foreground;
+  @apply bg-background font-sans text-foreground transition-colors duration-200;
 }

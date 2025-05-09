@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
+import ThemeToggle from '../ui/ThemeToggle';
 
 export default function AuthPage() {
   const [showLogin, setShowLogin] = useState(true);
@@ -8,7 +9,10 @@ export default function AuthPage() {
   return (
     <div className='container mx-auto px-4 py-8'>
       <div className='mx-auto max-w-md'>
-        <div className='mb-8 text-center'>
+        <div className='mb-8 text-center relative'>
+          <div className='absolute right-0 top-0'>
+            <ThemeToggle />
+          </div>
           <h1 className='mb-2 text-4xl font-bold'>QueMe</h1>
 
           <p className='text-muted-foreground'>

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import AuthPage from './components/auth/AuthPage';
+import ThemeToggle from './components/ui/ThemeToggle';
 import { useAuth } from './hooks/useAuth';
 
 const Dashboard = () => {
@@ -15,7 +16,9 @@ const Dashboard = () => {
         <h1 className='text-4xl font-bold'>QueMe</h1>
 
         <div className='flex items-center gap-4'>
-          <span>Welcome, {user?.username}!</span>
+          <h4 className='text-xl'>Welcome, {user?.username}!</h4>
+
+          <ThemeToggle className='mr-2' />
 
           <button
             onClick={handleLogout}
@@ -34,7 +37,9 @@ const Dashboard = () => {
           creating playlists based on your preferences!
         </p>
 
-        <button className='neu-button'>Create New Playlist</button>
+        <button className='neu-button focus:outline-0'>
+          Create New Playlist
+        </button>
       </div>
 
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
@@ -61,7 +66,7 @@ const Dashboard = () => {
 
 const AppContent = () => {
   const { user, isLoading, checkAuth } = useAuth();
-  
+
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -81,7 +86,7 @@ const AppContent = () => {
 
 function App() {
   return (
-    <div className='min-h-screen bg-background text-foreground'>
+    <div className='min-h-screen bg-background text-foreground transition-colors duration-200'>
       <AppContent />
     </div>
   );
