@@ -9,8 +9,8 @@ export default function AuthPage() {
   return (
     <div className='container mx-auto px-4 py-8'>
       <div className='mx-auto max-w-md'>
-        <div className='mb-8 text-center relative'>
-          <div className='absolute right-0 top-0'>
+        <div className='relative mb-8 text-center'>
+          <div className='absolute top-0 right-0'>
             <ThemeToggle />
           </div>
           <h1 className='mb-2 text-4xl font-bold'>QueMe</h1>
@@ -21,13 +21,8 @@ export default function AuthPage() {
         </div>
 
         {showLogin ?
-          <LoginForm
-            onSwitchToRegister={() => setShowLogin(false)}
-          />
-        : <RegistrationForm
-            onSwitchToLogin={() => setShowLogin(true)}
-          />
-        }
+          <LoginForm onSwitchToRegister={() => setShowLogin(false)} />
+        : <RegistrationForm onSwitchToLogin={() => setShowLogin(true)} />}
       </div>
     </div>
   );

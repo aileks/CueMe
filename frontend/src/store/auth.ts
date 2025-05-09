@@ -1,5 +1,4 @@
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 
 export interface User {
   id: string;
@@ -7,14 +6,11 @@ export interface User {
   email: string;
 }
 
-// Atoms
-export const userAtom = atomWithStorage<User | null>('cueme-user', null);
+export const userAtom = atom<User | null>(null);
 export const isLoadingAtom = atom<boolean>(true);
 
-// Derived atom
 export const isAuthenticatedAtom = atom(get => get(userAtom) !== null);
 
-// Authentication actions
 export const loginAction = atom(
   get => get(userAtom),
   (_, set, userData: User) => {
@@ -31,6 +27,7 @@ export const logoutAction = atom(
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
       });
 
       if (response.ok) {
@@ -49,11 +46,15 @@ export const checkAuthAction = atom(
   async (_, set) => {
     set(isLoadingAtom, true);
     try {
-      const response = await fetch('/api/auth/');
+      const response = await fetch('/api/auth/', {
+        credentials: 'include',
+      });
+
       if (response.ok) {
         const userData = await response.json();
         set(userAtom, userData);
       } else {
+        // Clear user data if not authenticated
         set(userAtom, null);
       }
     } catch (error) {

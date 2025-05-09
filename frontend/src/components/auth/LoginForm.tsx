@@ -12,7 +12,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const { login } = useAuth();
-  
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -24,6 +24,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
       });
 

@@ -11,10 +11,10 @@ export default function RegistrationForm({
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState(''); // Added state for password confirmation
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const { login } = useAuth();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -36,6 +36,7 @@ export default function RegistrationForm({
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ username, email, password }),
       });
 
@@ -57,12 +58,12 @@ export default function RegistrationForm({
   };
 
   return (
-    <div className='w-full max-w-md mx-auto'>
+    <div className='mx-auto w-full max-w-md'>
       <div className='neu-card my-8'>
-        <h2 className='text-3xl font-bold mb-6'>Create Account</h2>
+        <h2 className='mb-6 text-3xl font-bold'>Create Account</h2>
 
         {errors.message && (
-          <div className='mb-4 p-3 bg-destructive text-destructive-foreground'>
+          <div className='mb-4 bg-destructive p-3 text-destructive-foreground'>
             {errors.message.map((error, i) => (
               <p key={i}>{error}</p>
             ))}
@@ -73,7 +74,7 @@ export default function RegistrationForm({
           <div className='mb-4'>
             <label
               htmlFor='username'
-              className='block mb-2 font-medium'
+              className='mb-2 block font-medium'
             >
               Username
             </label>
@@ -94,7 +95,7 @@ export default function RegistrationForm({
           <div className='mb-4'>
             <label
               htmlFor='email'
-              className='block mb-2 font-medium'
+              className='mb-2 block font-medium'
             >
               Email
             </label>
@@ -115,7 +116,7 @@ export default function RegistrationForm({
           <div className='mb-4'>
             <label
               htmlFor='password'
-              className='block mb-2 font-medium'
+              className='mb-2 block font-medium'
             >
               Password
             </label>
@@ -136,7 +137,7 @@ export default function RegistrationForm({
           <div className='mb-6'>
             <label
               htmlFor='passwordConfirmation'
-              className='block mb-2 font-medium'
+              className='mb-2 block font-medium'
             >
               Confirm Password
             </label>
@@ -158,17 +159,17 @@ export default function RegistrationForm({
 
           <button
             type='submit'
-            className='neu-button w-full mb-4 font-bold'
+            className='neu-button mb-4 w-full font-bold'
             disabled={isLoading}
           >
             {isLoading ? 'Creating Account...' : 'Register'}
           </button>
 
-          <p className='text-center mt-4'>
+          <p className='mt-4 text-center'>
             Already have an account?{' '}
             <button
               type='button'
-              className='text-primary font-medium underline'
+              className='font-medium text-primary underline'
               onClick={onSwitchToLogin}
             >
               Log In
