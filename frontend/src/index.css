@@ -66,7 +66,7 @@
     --border-color: oklch(0.75 0.01 85);
     --input: oklch(0.25 0.01 0);
 
-    --shadow-color: oklch(0.1 0.01 0);
+    --shadow-color: oklch(0.3 0.01 0);
     --border-width: 2px;
     --shadow-offset: 4px;
 
