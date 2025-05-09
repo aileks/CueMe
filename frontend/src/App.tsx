@@ -55,9 +55,9 @@ const Dashboard = () => {
         <div className='neu-card'>
           <h3 className='mb-3 text-xl font-bold'>Surprise Me</h3>
 
-          <p className='text-muted-foreground'>
-            Create your first playlist to get personalized randomizations.
-          </p>
+          <div className='text- py-2 text-center text-lg text-primary'>
+            Coming Soon!
+          </div>
         </div>
       </div>
     </div>
