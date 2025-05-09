@@ -1,5 +1,5 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { themeAtom, themeAtomWithEffect, type Theme } from '../store/theme';
+import { themeAtom, themeAtomWithEffect } from '../store/theme';
 
 export function useTheme() {
   const theme = useAtomValue(themeAtom);
@@ -9,7 +9,7 @@ export function useTheme() {
     setTheme();
   };
 
-  const changeTheme = (newTheme: Theme) => {
+  const changeTheme = (newTheme: string) => {
     setTheme(newTheme);
   };
 
