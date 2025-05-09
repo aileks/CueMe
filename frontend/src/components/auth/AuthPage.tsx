@@ -1,10 +1,22 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import ThemeToggle from '../ui/ThemeToggle';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function AuthPage() {
   const [showLogin, setShowLogin] = useState(true);
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return (
+      <Navigate
+        to='/'
+        replace
+      />
+    );
+  }
 
   return (
     <div className='container mx-auto px-4 py-8'>
