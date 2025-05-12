@@ -1,19 +1,9 @@
-import os
 import uuid
 
 from flask_login import UserMixin
-from sqlalchemy import Uuid as GenericUUID
-from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from .db import SCHEMA, db, environment
-
-db_uri = os.environ.get("DATABASE_URL", "")
-
-if db_uri.startswith("postgresql"):
-    UUIDColumnType = PG_UUID(as_uuid=True)
-else:
-    UUIDColumnType = GenericUUID(as_uuid=True)
+from .db import SCHEMA, UUIDColumnType, db, environment
 
 
 class User(db.Model, UserMixin):
