@@ -19,8 +19,8 @@ class Playlist(db.Model):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
     user = db.relationship("User", back_populates="playlists")
-    songs = db.relationship(
-        "PlaylistSong", back_populates="playlist", cascade="all, delete-orphan"
+    tracks = db.relationship(
+        "PlaylistTrack", back_populates="playlist", cascade="all, delete-orphan"
     )
 
     def to_dict(self):
@@ -29,14 +29,14 @@ class Playlist(db.Model):
             "name": self.name,
             "user_id": self.user_id,
             "created_at": self.created_at,
-            "song_count": len(self.songs),  # type: ignore
+            "track_count": len(self.tracks),  # type: ignore
         }
 
-    def to_dict_with_songs(self):
+    def to_dict_with_tracks(self):
         return {
             "id": self.id,
             "name": self.name,
             "user_id": self.user_id,
             "created_at": self.created_at,
-            "songs": [song.to_dict() for song in self.songs],  # type: ignore
+            "tracks": [track.to_dict() for track in self.tracks],  # type: ignore
         }

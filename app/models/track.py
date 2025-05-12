@@ -3,8 +3,8 @@ import uuid
 from .db import SCHEMA, UUIDColumnType, db, environment
 
 
-class Song(db.Model):
-    __tablename__ = "songs"
+class Track(db.Model):
+    __tablename__ = "tracks"
 
     if environment == "prod":
         __table_args__ = {"schema": SCHEMA}
@@ -14,7 +14,7 @@ class Song(db.Model):
     artist = db.Column(db.String(100), nullable=False)
     genre = db.Column(db.String(50))
 
-    playlists = db.relationship("PlaylistSong", back_populates="song")
+    playlists = db.relationship("PlaylistTracks", back_populates="track")
 
     def to_dict(self):
         return {

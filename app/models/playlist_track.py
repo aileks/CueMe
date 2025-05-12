@@ -5,8 +5,8 @@ from sqlalchemy import ForeignKey
 from .db import SCHEMA, UUIDColumnType, add_prefix_for_prod, db, environment
 
 
-class PlaylistSong(db.Model):
-    __tablename__ = "playlist_songs"
+class PlaylistTrack(db.Model):
+    __tablename__ = "playlist_tracks"
 
     if environment == "prod":
         __table_args__ = {"schema": SCHEMA}
@@ -15,20 +15,20 @@ class PlaylistSong(db.Model):
     playlist_id = db.Column(
         UUIDColumnType, ForeignKey(add_prefix_for_prod("playlists.id")), nullable=False
     )
-    song_id = db.Column(
-        UUIDColumnType, ForeignKey(add_prefix_for_prod("songs.id")), nullable=False
+    track_id = db.Column(
+        UUIDColumnType, ForeignKey(add_prefix_for_prod("tracks.id")), nullable=False
     )
     position = db.Column(db.Integer, nullable=False)
 
     # Relationships
-    playlist = db.relationship("Playlist", back_populates="songs")
-    song = db.relationship("Song", back_populates="playlists")
+    playlist = db.relationship("Playlist", back_populates="tracks")
+    track = db.relationship("track", back_populates="playlists")
 
     def to_dict(self):
         return {
             "id": self.id,
             "playlist_id": self.playlist_id,
-            "song_id": self.song_id,
+            "track_id": self.track_id,
             "position": self.position,
-            "song": self.song.to_dict(),
+            "track": self.track.to_dict(),
         }
