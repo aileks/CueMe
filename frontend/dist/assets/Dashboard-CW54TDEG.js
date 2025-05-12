@@ -1,0 +1,11 @@
+import{c as s,j as e,L as a,M as t}from"./index-9c8xibJP.js";import{C as c}from"./circle-plus-0fRR1bW4.js";/**
+ * @license lucide-react v0.509.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const l=[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["polyline",{points:"12 6 12 12 16 14",key:"68esgv"}]],n=s("clock",l);/**
+ * @license lucide-react v0.509.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const r=[["path",{d:"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",key:"4pj2yx"}],["path",{d:"M20 3v4",key:"1olli1"}],["path",{d:"M22 5h-4",key:"1gvqau"}],["path",{d:"M4 17v2",key:"vumght"}],["path",{d:"M5 18H3",key:"zchphs"}]],i=s("sparkles",r);function m(){return e.jsxs("div",{children:[e.jsxs("div",{className:"mb-8 neu-card",children:[e.jsxs("h2",{className:"mb-4 flex items-center gap-2 text-2xl font-bold",children:[e.jsx(i,{className:"h-6 w-6 text-accent"}),"Home"]}),e.jsx("p",{className:"mb-4",children:"Welcome to QueMe, your personal music playlist generator. Start creating playlists based on your preferences!"}),e.jsxs(a,{to:"/create",className:"inline-flex neu-button items-center gap-2 focus:outline-0",children:[e.jsx(c,{className:"h-5 w-5"}),"Create New Playlist"]})]}),e.jsxs("div",{className:"grid grid-cols-1 gap-6 md:grid-cols-2",children:[e.jsxs("div",{className:"neu-card",children:[e.jsxs("h3",{className:"mb-3 flex items-center gap-2 text-xl font-bold",children:[e.jsx(n,{className:"h-5 w-5 text-accent"}),"Recent Playlists"]}),e.jsx("p",{className:"text-muted-foreground",children:"You haven't created any playlists yet. Get started by clicking the button above!"})]}),e.jsxs("div",{className:"neu-card",children:[e.jsxs("h3",{className:"mb-3 flex items-center gap-2 text-xl font-bold",children:[e.jsx(t,{className:"h-5 w-5 text-accent"}),"Surprise Me"]}),e.jsx("div",{className:"py-2 text-center text-lg font-medium text-amber-600",children:"Coming Soon!"})]})]})]})}export{m as default};

@@ -1,16 +1,16 @@
-import { createBrowserRouter, Outlet, RouterProvider, Navigate } from 'react-router';
+import { createBrowserRouter, Outlet, RouterProvider, Navigate, NavLink } from 'react-router';
 import { useAuth } from './hooks/useAuth';
-import AuthPage from './components/auth/AuthPage';
-import Dashboard from './pages/Dashboard';
-import UserProfile from './pages/UserProfile';
-import CreatePlaylist from './pages/CreatePlaylist';
-import ManagePlaylists from './pages/ManagePlaylists';
-import PlaylistDetail from './pages/PlaylistDetail';
-import NotFound from './pages/NotFound';
-import NavLink from './components/ui/NavLink';
-import ThemeToggle from './components/ui/ThemeToggle';
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { LayoutDashboard, Music2, User, LogOut, Loader2 } from 'lucide-react';
+import ThemeToggle from './components/ui/ThemeToggle';
+
+const AuthPage = lazy(() => import('./pages/AuthPage'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const UserProfile = lazy(() => import('./pages/UserProfile'));
+const CreatePlaylist = lazy(() => import('./pages/CreatePlaylist'));
+const ManagePlaylists = lazy(() => import('./pages/ManagePlaylists'));
+const PlaylistDetail = lazy(() => import('./pages/PlaylistDetail'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -26,17 +26,21 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
       </div>
     );
   }
+
   if (!isAuthenticated) {
     return <Navigate to='/auth' replace />;
   }
+
   return <>{children}</>;
 };
 
 const AppLayout = () => {
   const { user, logout } = useAuth();
+
   const handleLogout = async () => {
     await logout();
   };
+
   return (
     <div className='container mx-auto p-6'>
       <header className='mb-8 flex items-center justify-between'>
@@ -44,7 +48,7 @@ const AppLayout = () => {
           <h1 className='text-4xl font-bold'>QueMe!</h1>
 
           <nav className='hidden items-center gap-6 md:flex'>
-            <NavLink to='/' exact>
+            <NavLink to='/'>
               <LayoutDashboard className='mr-1 inline-block h-4 w-4' />
               Dashboard
             </NavLink>

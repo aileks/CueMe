@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router';
-import LoginForm from './LoginForm';
-import RegistrationForm from './RegistrationForm';
-import ThemeToggle from '../ui/ThemeToggle';
-import { useAuth } from '../../hooks/useAuth';
+import LoginForm from '../components/auth/LoginForm';
+import RegistrationForm from '../components/auth/RegistrationForm';
+import ThemeToggle from '../components/ui/ThemeToggle';
+import { useAuth } from '../hooks/useAuth';
 
 export default function AuthPage() {
   const [showLogin, setShowLogin] = useState(true);
@@ -22,9 +22,7 @@ export default function AuthPage() {
           </div>
           <h1 className='mb-2 text-4xl font-bold'>QueMe</h1>
 
-          <p className='text-muted-foreground'>
-            Create your next music fixation.
-          </p>
+          <p className='text-muted-foreground'>Create your next music fixation.</p>
         </div>
 
         {showLogin ?
