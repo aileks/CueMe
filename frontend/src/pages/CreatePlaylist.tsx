@@ -25,13 +25,10 @@ export default function CreatePlaylist() {
   const [playlistGenerated, setPlaylistGenerated] = useState(false);
   const [generatedPlaylist, setGeneratedPlaylist] = useState<any>(null);
   const [error, setError] = useState('');
-
-  // Audio features state
   const [availableFeatures, setAvailableFeatures] = useState<any>({});
   const [showFeatures, setShowFeatures] = useState(false);
   const [featurePreferences, setFeaturePreferences] = useState<Record<string, number>>({});
 
-  // Only fetch audio features on component mount
   useEffect(() => {
     fetchAudioFeatures();
   }, []);
@@ -218,11 +215,12 @@ export default function CreatePlaylist() {
   };
 
   return (
-    <div className='mx-auto max-w-3xl'>
+    <div className='mx-auto max-w-4xl'>
       <h1 className='mb-6 text-3xl font-bold'>Create New Playlist</h1>
 
       {error && <div className='mb-4 bg-destructive p-3 text-destructive-foreground'>{error}</div>}
 
+      {/* Generated Playlist View */}
       {playlistGenerated ?
         <div className='neu-card'>
           <h2 className='mb-4 text-2xl font-semibold'>Playlist Generated!</h2>
@@ -233,6 +231,7 @@ export default function CreatePlaylist() {
             {generatedPlaylist.genres.length > 0 && (
               <div className='mb-2'>
                 <h4 className='mb-1 text-sm font-medium text-muted-foreground'>Genres:</h4>
+
                 <div className='flex flex-wrap gap-2'>
                   {generatedPlaylist.genres.map((genre: string) => (
                     <span key={genre} className='neu-tag'>
@@ -246,6 +245,7 @@ export default function CreatePlaylist() {
             {generatedPlaylist.artists.length > 0 && (
               <div>
                 <h4 className='mb-1 text-sm font-medium text-muted-foreground'>Artists:</h4>
+
                 <div className='flex flex-wrap gap-2'>
                   {generatedPlaylist.artists.map((artist: string) => (
                     <span key={artist} className='neu-tag flex items-center gap-1'>
@@ -261,6 +261,7 @@ export default function CreatePlaylist() {
           {generatedPlaylist.tracks.length > 0 ?
             <div className='mb-6 max-h-96 overflow-auto'>
               <h3 className='mb-2 text-lg font-medium'>Tracks</h3>
+
               <div className='border-border-color border-t'>
                 {generatedPlaylist.tracks.map((track: any, index: number) => (
                   <div
@@ -271,6 +272,7 @@ export default function CreatePlaylist() {
                       <p className='font-medium'>{track.title}</p>
                       <p className='text-sm text-muted-foreground'>{track.artist}</p>
                     </div>
+
                     <div className='text-right text-sm text-muted-foreground'>{track.album}</div>
                   </div>
                 ))}
@@ -315,7 +317,7 @@ export default function CreatePlaylist() {
           <div className='mb-6 neu-card'>
             <h2 className='mb-4 text-2xl font-semibold'>Select Genres</h2>
 
-            {/* Using hardcoded genres directly */}
+            {/* Genres Section */}
             <div className='flex flex-wrap gap-3'>
               {availableGenres.map(genre => (
                 <button
