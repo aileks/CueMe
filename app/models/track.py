@@ -14,7 +14,7 @@ class Track(db.Model):
     artist = db.Column(db.String(100), nullable=False)
     genre = db.Column(db.String(50))
 
-    playlists = db.relationship("PlaylistTracks", back_populates="track")
+    playlists = db.relationship("PlaylistTrack", back_populates="track")
 
     def to_dict(self):
         return {

@@ -22,7 +22,7 @@ class PlaylistTrack(db.Model):
 
     # Relationships
     playlist = db.relationship("Playlist", back_populates="tracks")
-    track = db.relationship("track", back_populates="playlists")
+    track = db.relationship("Track", back_populates="playlists")
 
     def to_dict(self):
         return {
