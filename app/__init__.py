@@ -9,10 +9,11 @@ from flask_wtf.csrf import generate_csrf
 
 from .config import Config
 from .models import User, db
-from .routes import auth_bp
+from .routes import auth_bp, playlist_bp
 
 app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
+app.register_blueprint(playlist_bp, url_prefix="/api/playlists")
 app.config.from_object(Config)
 
 login = LoginManager()

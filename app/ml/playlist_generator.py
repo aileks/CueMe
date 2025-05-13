@@ -204,74 +204,103 @@ class PlaylistGenerator:
         return True
 
     def generate_playlist(
-        self,
-        preferences: dict[str, list[str]],
-        feature_preferences: Optional[dict[str, float]] = None,
-        num_tracks: int = 10,
+        self, preferences: dict[str, list[str]], num_tracks: int = 10
     ) -> list[TrackDict]:
         """
-        Generate a playlist based on user preferences and audio feature preferences
+        Generate a playlist based on user preferences with improved debugging
 
         Args:
             preferences: Dict with 'artists' and 'genres' as lists
-            feature_preferences: Dict with audio feature preferences (e.g., {'danceability': 0.8})
             num_tracks: Number of tracks to include in the playlist
 
         Returns:
             List of track dictionaries
         """
+        # If model loading fails, and especially if tracks_df is None,
+        # we cannot proceed to generate even random tracks from it.
         if not self.load_model():
+            print("Failed to load model")
             return []
 
-        if self.tracks_df is None or self.tracks_df.empty:
+        # This case should ideally be caught by load_model returning False, but as a safeguard:
+        if (
+            self.tracks_df is None
+            or self.vectorizer is None
+            or self.feature_matrix is None
+        ):
+            print(
+                "Missing required components (tracks_df, vectorizer, or feature_matrix)"
+            )
             return []
 
-        # Initialize weights for each track (higher is better)
-        weights = np.ones(len(self.tracks_df))
-
-        # Apply text-based matching if we have preferences
+        # Create a query vector from preferences
         artists: list[str] = preferences.get("artists", [])
         genres: list[str] = preferences.get("genres", [])
 
+        # Debug log the preferences
+        print(f"Generating playlist with preferences:")
+        print(f"- Artists: {artists}")
+        print(f"- Genres: {genres}")
+
         query_text: str = " ".join(artists + genres)
-        if (
-            query_text.strip()
-            and self.vectorizer is not None
-            and self.text_feature_matrix is not None
-        ):
-            # Calculate text similarity
-            query_vector = self.vectorizer.transform([query_text])
-            text_similarities = cosine_similarity(
-                query_vector, self.text_feature_matrix
-            ).flatten()
-            weights *= (
-                text_similarities + 0.1
-            )  # Add small constant to avoid zero weights
 
-        # Apply audio feature preferences if available
-        if feature_preferences and self.feature_matrix is not None:
-            feature_names = [
-                "danceability",
-                "energy",
-                "loudness",
-                "speechiness",
-                "acousticness",
-                "instrumentalness",
-                "liveness",
-                "valence",
-                "tempo",
-            ]
+        # If no preferences, return random tracks
+        if not query_text.strip():
+            print("No preferences provided, returning random tracks")
+            if self.tracks_df.empty:
+                return []
 
-            for feature, target_value in feature_preferences.items():
-                if feature in self.tracks_df.columns:
-                    feature_idx = feature_names.index(feature)
-                    feature_values = self.feature_matrix[:, feature_idx]
-                    # Calculate closeness to target value (higher is better)
-                    feature_weights = 1 / (1 + np.abs(feature_values - target_value))
-                    weights *= feature_weights
+            random_tracks = self.tracks_df.sample(
+                min(num_tracks, len(self.tracks_df))
+            ).to_dict("records")
+            print(f"Random selection: {len(random_tracks)} tracks")
+            return random_tracks
 
-        # Get top tracks based on combined weights
-        top_indices = np.argsort(weights)[-num_tracks:][::-1]
+        # Debug log the query text
+        print(f"Query text: '{query_text}'")
+
+        # Transform the query to the same feature space as tracks
+        query_vector = self.vectorizer.transform([query_text])
+
+        # Log shape information
+        print(f"Query vector shape: {query_vector.shape}")
+        print(f"Feature matrix shape: {self.feature_matrix.shape}")
+
+        # Calculate similarity scores
+        similarity_scores = cosine_similarity(
+            query_vector, self.feature_matrix
+        ).flatten()
+
+        # Log similarity score information
+        print(
+            f"Similarity scores range: {similarity_scores.min():.4f} to {similarity_scores.max():.4f}"
+        )
+        print(f"Mean similarity: {similarity_scores.mean():.4f}")
+        print(f"Number of scores > 0.5: {sum(similarity_scores > 0.5)}")
+        print(f"Number of scores > 0.2: {sum(similarity_scores > 0.2)}")
+
+        # Get top N track indices
+        actual_num_tracks = min(num_tracks, len(similarity_scores))
+        if actual_num_tracks == 0:
+            print("No tracks available after filtering")
+            return []
+
+        # Get top indices
+        top_indices = np.argsort(similarity_scores)[-actual_num_tracks:][::-1]
+
+        # Log top similarity scores
+        print(
+            f"Top 5 similarity scores: {[f'{similarity_scores[i]:.4f}' for i in top_indices[:5]]}"
+        )
+
+        # Get recommended tracks
         recommended_tracks = self.tracks_df.iloc[top_indices].to_dict("records")
+
+        # Debug log some of the recommended tracks
+        print(f"Recommended {len(recommended_tracks)} tracks, first 3:")
+        for i, track in enumerate(recommended_tracks[:3]):
+            print(
+                f"{i + 1}. {track.get('artist', 'Unknown')} - {track.get('title', 'Unknown')} (score: {similarity_scores[top_indices[i]]:.4f})"
+            )
 
         return recommended_tracks
