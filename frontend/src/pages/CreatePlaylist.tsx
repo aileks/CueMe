@@ -1,18 +1,44 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { PlusCircle, X, Music2, Loader2, Sliders } from 'lucide-react';
 
+interface Track {
+  id?: string | number;
+  title: string;
+  artist: string;
+  album: string;
+}
+
+interface GeneratedPlaylist {
+  playlist_name: string;
+  genres: string[];
+  artists: string[];
+  tracks: Track[];
+}
+
+interface FeatureInfo {
+  min: number;
+  max: number;
+  mean: number;
+  description?: string;
+}
+
+interface AvailableFeatures {
+  [key: string]: FeatureInfo;
+}
+
 export default function CreatePlaylist() {
   const [playlistName, setPlaylistName] = useState('');
   const availableGenres = [
     'Rock',
     'Pop',
     'Punk',
-    'Hip-Hop',
+    'Hip Hop',
     'R&B',
-    'Jazz',
-    'Electronic',
-    'Classical',
     'Country',
+    'Jazz',
+    'Classical',
+    'Electronic',
+    'Dance',
     'Folk',
     'Metal',
     'Indie',
@@ -23,9 +49,9 @@ export default function CreatePlaylist() {
   const [artists, setArtists] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [playlistGenerated, setPlaylistGenerated] = useState(false);
-  const [generatedPlaylist, setGeneratedPlaylist] = useState<any>(null);
+  const [generatedPlaylist, setGeneratedPlaylist] = useState<GeneratedPlaylist | null>(null);
   const [error, setError] = useState('');
-  const [availableFeatures, setAvailableFeatures] = useState<any>({});
+  const [availableFeatures, setAvailableFeatures] = useState<AvailableFeatures>({});
   const [showFeatures, setShowFeatures] = useState(false);
   const [featurePreferences, setFeaturePreferences] = useState<Record<string, number>>({});
 
@@ -41,7 +67,7 @@ export default function CreatePlaylist() {
         throw new Error(`Features fetch failed: ${res.statusText}`);
       }
 
-      const data = await res.json();
+      const data: { features: AvailableFeatures } = await res.json();
       setAvailableFeatures(data.features || {});
     } catch (err) {
       console.error('Error fetching audio features:', err);
@@ -117,10 +143,13 @@ export default function CreatePlaylist() {
       });
 
       if (!res.ok) {
-        throw new Error(`Failed to generate playlist: ${res.statusText}`);
+        const errorData = await res
+          .json()
+          .catch(() => ({ message: `Failed to generate playlist: ${res.statusText}` }));
+        throw new Error(errorData.message || `Failed to generate playlist: ${res.statusText}`);
       }
 
-      const playlist = await res.json();
+      const playlist: GeneratedPlaylist = await res.json();
       setGeneratedPlaylist(playlist);
       setPlaylistGenerated(true);
     } catch (err) {
@@ -144,7 +173,8 @@ export default function CreatePlaylist() {
       });
 
       if (!res.ok) {
-        throw new Error('Failed to save playlist');
+        const errorData = await res.json().catch(() => ({ message: 'Failed to save playlist' }));
+        throw new Error(errorData.message || 'Failed to save playlist');
       }
 
       const data = await res.json();
@@ -163,9 +193,9 @@ export default function CreatePlaylist() {
     setPlaylistName('My New Playlist');
     setGeneratedPlaylist(null);
     setFeaturePreferences({});
+    setError('');
   };
 
-  // Render audio feature controls
   const renderFeatureControls = () => {
     return (
       <div className='mb-6 neu-card'>
@@ -183,7 +213,7 @@ export default function CreatePlaylist() {
 
         {showFeatures && (
           <div className='grid gap-4 md:grid-cols-2'>
-            {Object.entries(availableFeatures).map(([feature, info]: [string, any]) => (
+            {Object.entries(availableFeatures).map(([feature, info]) => (
               <div key={feature} className='mb-2'>
                 <label className='mb-1 block font-medium'>
                   {feature.charAt(0).toUpperCase() + feature.slice(1)}
@@ -195,7 +225,7 @@ export default function CreatePlaylist() {
                   min={info.min}
                   max={info.max}
                   step={(info.max - info.min) / 100}
-                  value={featurePreferences[feature] || info.mean}
+                  value={featurePreferences[feature] ?? info.mean}
                   onChange={e => handleFeatureChange(feature, parseFloat(e.target.value))}
                   className='h-2 w-full cursor-pointer appearance-none rounded-lg bg-muted'
                 />
@@ -221,14 +251,14 @@ export default function CreatePlaylist() {
       {error && <div className='mb-4 bg-destructive p-3 text-destructive-foreground'>{error}</div>}
 
       {/* Generated Playlist View */}
-      {playlistGenerated ?
+      {playlistGenerated && generatedPlaylist ?
         <div className='neu-card'>
           <h2 className='mb-4 text-2xl font-semibold'>Playlist Generated!</h2>
 
           <div className='mb-4'>
             <h3 className='mb-2 text-xl font-medium'>{generatedPlaylist.playlist_name}</h3>
 
-            {generatedPlaylist.genres.length > 0 && (
+            {generatedPlaylist.tracks.length > 0 && (
               <div className='mb-2'>
                 <h4 className='mb-1 text-sm font-medium text-muted-foreground'>Genres:</h4>
 
@@ -263,7 +293,7 @@ export default function CreatePlaylist() {
               <h3 className='mb-2 text-lg font-medium'>Tracks</h3>
 
               <div className='border-border-color border-t'>
-                {generatedPlaylist.tracks.map((track: any, index: number) => (
+                {generatedPlaylist.tracks.map((track: Track, index: number) => (
                   <div
                     key={track.id || index}
                     className='border-border-color flex justify-between border-b px-2 py-3'

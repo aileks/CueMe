@@ -1,11 +1,15 @@
 import os
 import uuid
 
+import click
 from flask import Flask, Response, redirect, request, send_from_directory
+from flask.cli import with_appcontext
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
+
+from app.services.spotify_service import SpotifyService
 
 from .config import Config
 from .models import User, db
@@ -19,6 +23,52 @@ app.config.from_object(Config)
 login = LoginManager()
 login.init_app(app)
 login.login_view = "auth.unauthorized"  # type: ignore
+
+
+@click.command("test-spotify")
+@with_appcontext
+def test_spotify_command():
+    """Test the SpotifyService class functionality."""
+    client_id = os.environ.get("SPOTIFY_CLIENT_ID")
+    client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET")
+
+    if not client_id or not client_secret:
+        print("Error: Missing Spotify credentials in .env file")
+        return
+
+    service = SpotifyService(client_id=client_id, client_secret=client_secret)
+
+    # Test getting genre list
+    print("\n===== AVAILABLE GENRES =====")
+    genres = service.get_genre_list()
+    print(f"Found {len(genres)} genres")
+    print(genres[:10])  # Print first 10 genres
+
+    # Test finding tracks for a genre
+    test_genre = "rock"
+    print(f"\n===== TRACKS FOR GENRE: {test_genre} =====")
+    tracks = service.find_tracks_by_genre(test_genre, limit=5)
+
+    print(f"Found {len(tracks)} tracks")
+    for i, track in enumerate(tracks[:5], 1):
+        artist_names = ", ".join([artist["name"] for artist in track["artists"]])
+        print(f"{i}. {track['name']} by {artist_names}")
+
+    # Test getting audio features
+    if tracks:
+        print("\n===== AUDIO FEATURES =====")
+        track_ids = [track["id"] for track in tracks[:2]]
+        features = service.get_track_features(track_ids)
+
+        for i, feature in enumerate(features, 1):
+            print(f"\nTrack {i} features:")
+            # Print a few key features
+            for key in ["danceability", "energy", "tempo", "valence"]:
+                if key in feature:
+                    print(f"  {key}: {feature[key]}")
+
+
+app.cli.add_command(test_spotify_command)
 
 
 @login.user_loader
